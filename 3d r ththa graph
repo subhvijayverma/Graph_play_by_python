@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.animation import FuncAnimation
+
+# Generate theta values
+theta = np.linspace(0, 10 * np.pi, 1000)
+r = theta
+x = r * np.cos(theta)
+y = r * np.sin(theta)
+z = theta
+
+# Set up the figure and 3D axis
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Initialize the line object
+line, = ax.plot([], [], [], lw=2)
+
+# Setting the limits
+ax.set_xlim(-30, 30)
+ax.set_ylim(-30, 30)
+ax.set_zlim(0, 35)
+
+# Initialization function
+def init():
+    line.set_data([], [])
+    line.set_3d_properties([])
+    return line,
+
+# Animation update function
+def update(frame):
+    line.set_data(x[:frame], y[:frame])
+    line.set_3d_properties(z[:frame])
+    return line,
+
+# Create animation
+ani = FuncAnimation(fig, update, frames=len(theta), init_func=init, blit=True, interval=10)
+
+plt.title("3D Spiral Animation: r = θ")
+plt.show()
+
