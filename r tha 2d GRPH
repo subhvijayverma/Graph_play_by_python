@@ -1,0 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate theta values from 0 to 10π
+theta = np.linspace(0, 10 * np.pi, 1000)
+
+# r = theta
+r = theta
+
+# Create a polar plot
+plt.figure(figsize=(6, 6))
+ax = plt.subplot(111, projection='polar')
+ax.plot(theta, r)
+
+# Set the title and show the plot
+ax.set_title("Polar Plot of r = θ", va='bottom')
+plt.show()
