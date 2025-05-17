@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# Generate theta values
+theta = np.linspace(0, 10 * np.pi, 1000)
+r = theta
+
+# Set up the figure and polar axis
+fig = plt.figure()
+ax = plt.subplot(111, projection='polar')
+
+# Initialize the line object
+line, = ax.plot([], [], lw=2)
+
+# Set the limits
+ax.set_ylim(0, max(r))
+ax.set_title("2D Polar Animation: r = θ", va='bottom')
+
+# Initialization function
+def init():
+    line.set_data([], [])
+    return line,
+
+# Animation update function
+def update(frame):
+    line.set_data(theta[:frame], r[:frame])
+    return line,
+
+# Create animation
+ani = FuncAnimation(fig, update, frames=len(theta), init_func=init, blit=True, interval=10)
+
+plt.show()
